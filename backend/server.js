@@ -12,3 +12,20 @@ const conexao = mysql.createconnection({
     passaword:'',
     database: 'escola',
 })
+
+app.post("/salvar", (req, res) => {
+    let nome = req.body.nome;
+    let idade = req.body.idade;
+
+    let sql = "INSERT INTO alunos (nome, idade) VALUES (?, ?);"
+
+    conexao.query(sql, [nome, idade],(erro, resultado) =>{
+        if (erro){
+            console.log(erro);
+        } else {
+            res.send("aluno salvo com cucesso");
+        }
+    })
+})
+
+app
